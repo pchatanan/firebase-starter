@@ -8,6 +8,7 @@ import { useStore } from '../states/GlobalStore';
 import TopNavBar from '../nav/TopNavBar';
 import LandingPage from './LandingPage';
 import ResetPasswordPage from './ResetPasswordPage';
+import { Widget, Main } from 'simply-ui'
 
 export const secureAuth = (Component, isAuth) => props => {
   const store = useStore()
@@ -52,14 +53,18 @@ const AppRouter = props => {
     return (<div>Authenticating...</div>)
   }
   return (<BrowserRouter>
-    <TopNavBar />
-    {Object.values(routes).map((r, index) => <Route exact path={r.path} component={r.component} key={index} />)}
-    {store.error && <div>
+    <Main.NavBarContainer>
+      <TopNavBar />
+    </Main.NavBarContainer>
+    <Main.ContentContainer>
+      {Object.values(routes).map((r, index) => <Route exact path={r.path} component={r.component} key={index} />)}
+    </Main.ContentContainer>
+    <Main.ErrorContainer show={store.error != null}>
       <span>{store.error}</span>
-      <button onClick={e => {
+      <Widget.Button onClick={e => {
         store.error = null
-      }}>dismiss</button>
-    </div>}
+      }}>dismiss</Widget.Button>
+    </Main.ErrorContainer>}
   </BrowserRouter>)
 }
 

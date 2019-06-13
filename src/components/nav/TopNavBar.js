@@ -23,7 +23,6 @@ const TopNavBar = props => {
   }
   else {
     return (<div>
-      NonAuth
       <Link to={routes.LandingPage.path}><button>Home</button></Link>
       <Link to={routes.LoginPage.path}><button>Login</button></Link>
       <Link to={routes.RegisterPage.path}><button>Register</button></Link>
